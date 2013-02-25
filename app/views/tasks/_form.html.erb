@@ -1,0 +1,29 @@
+<%= form_for(@task) do |f| %>
+    <% if @task.errors.any? %>
+        <% @task.errors.full_messages.each do |msg| %>
+            <div class="alert-box alert"><span class="error">Error:</span> <%= msg %>
+              <a href="" class="close">×</a></div>
+        <% end %>
+    <% end %>
+
+    <div class="row">
+      <div class="fields five columns">
+        <div class="row">
+          <div class="two column"><%= f.label :type, "Type:", :class => 'right inline' %></div>
+          <div class="ten column"><%= f.number_field :type, :class => "two" %></div>
+        </div>
+        <div class="row">
+          <div class="two column"><%= f.label :title, "Title:", :class => 'right inline' %></div>
+          <div class="ten columns"><%= f.text_field :title %></div>
+        </div>
+        <div class="row">
+          <div class="two column"><%= f.label :desc, "Description:", :class => 'right inline' %></div>
+          <div class="ten columns"><%= f.text_area :desc, :rows => 3 %></div>
+        </div>
+        <div class="actions row">
+          <div class="two column"></div>
+          <div class="ten columns"><%= f.submit :class => 'button radius' %></div>
+        </div>
+      </div>
+    </div>
+<% end %>

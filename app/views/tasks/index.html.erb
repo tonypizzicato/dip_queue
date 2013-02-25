@@ -1,0 +1,120 @@
+<% title "Listing tasks" %>
+<h1><%= yield :title %> | <%= link_to "Add new", new_task_path, :class => 'appendix' %></h1>
+
+<table class="twelve">
+  <thead>
+  <tr>
+    <th class="one text-center">Type</th>
+    <th class="three">Title</th>
+    <th class="six">Desc</th>
+    <th class="two text-center">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tasks.each do |task| %>
+      <tr>
+        <td class="text-center"><%= task.type %></td>
+        <td><%= task.title %></td>
+        <td><%= task.desc %></td>
+        <td class="text-center"><%= link_to 'Show', task %> |
+          <%= link_to 'Edit', edit_task_path(task) %> |
+          <%= link_to 'Destroy', task, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+  </table>
+
+<div class="row">
+  <div class="content">
+    <div class="verticalChart">
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">37%</span>
+          </div>
+        </div>
+        <div class="title">US</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">16%</span>
+          </div>
+        </div>
+        <div class="title">PL</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">12%</span>
+          </div>
+        </div>
+        <div class="title">GB</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">9%</span>
+          </div>
+        </div>
+        <div class="title">DE</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">7%</span>
+          </div>
+        </div>
+        <div class="title">NL</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">6%</span>
+          </div>
+        </div>
+        <div class="title">CA</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">5%</span>
+          </div>
+        </div>
+        <div class="title">FI</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">4%</span>
+          </div>
+        </div>
+        <div class="title">RU</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">3%</span>
+          </div>
+        </div>
+        <div class="title">AU</div>
+      </div>
+
+      <div class="singleBar">
+        <div class="bar">
+          <div class="value">
+            <span style="display: inline;">1%</span>
+          </div>
+        </div>
+        <div class="title">N/A</div>
+      </div>
+    </div>
+  </div>
+</div>

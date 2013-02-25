@@ -1,0 +1,20 @@
+<% title @task.title %>
+<h1><%= yield :title %> |
+  <span class="appendix"><%= link_to 'Edit', edit_task_path(@task) %></span> |
+  <span class="appendix"><%= link_to 'Back', tasks_path %></span>
+</h1>
+
+<% if (notice) %>
+    <div class="alert-box success"><%= notice %></div>
+<% end %>
+<p>
+  <b>Type:</b>
+  <%= @task.type %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @task.desc %>
+</p>
+
+
