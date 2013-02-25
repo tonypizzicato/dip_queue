@@ -1,0 +1,210 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require foundation_and_overrides
+ *= require _font-awesome
+ *= require_self
+ *= require_tree .
+ */
+
+body {
+  background: #F5F5F5;
+  color: #3b3b41;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+body * {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+
+}
+
+h1, h2, h3 {
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 32px;
+}
+
+h1 .appendix {
+  font-size: 20px;
+}
+
+nav.top-bar {
+  margin-bottom: 0px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background: #3b3b41;
+  filter: none;
+  text-shadow: 1px 1px 1px #0a0c0e;
+  border: none;
+  color: #fff;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  border-bottom: 1px solid #38383D;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+
+  ul > li.name a {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: 300;
+    color: #777777;
+    text-shadow: 0 1px 0 #ffffff;
+    span {
+      color: #fff;
+      text-shadow: none;
+    }
+  }
+}
+
+.row {
+  width: 100%;
+}
+
+#side-nav {
+  margin-top: 40px;
+  padding-right: 0;
+  .side-nav {
+    padding: 0;
+    li {
+      float: none;
+      text-align: center !important;
+      a {
+        padding: 25px 0px;
+        color: #aaa;
+        text-shadow: 0px 1px 0px white;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        border-left: none;
+        border-right: none;
+        background: transparent;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+        text-decoration: none;
+        font-size: 10px;
+        line-height: 20px;
+        i.icon {
+          width: 100%;
+          margin-left: 1px;
+          line-height: 20px;
+        }
+        &:hover {
+          color: #666;
+        }
+      }
+      &.active a {
+        border: 2px solid #eee;
+        border-right: none;
+        color: #3b3b41;
+        background: #fff;
+        -webkit-border-radius: 5px 0px 0px 5px !important;
+        -moz-border-radius: 5px 0px 0px 5px !important;
+        border-radius: 5px 0px 0px 5px !important;
+        position: relative;
+        z-index: 20;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+#content {
+  background: #ffffff;
+  filter: none;
+  min-height: 100%;
+  padding: 20px 20px;
+  -webkit-border-radius: 0px 5px 5px 5px;
+  -moz-border-radius: 0px 5px 5px 5px;
+  border-radius: 0px 5px 5px 5px;
+  border: 2px solid #eee;
+  position: relative;
+  margin: 40px 0;
+  padding: 20px;
+  margin-left: -2px;
+  float: left;
+  width: 91%;
+  min-height: 500px;
+}
+
+#flash_notice, #flash_alert {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+#flash_alert {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+.field_with_errors input {
+  border-color: red;
+}
+
+div.alert-box {
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5) !important;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 18px;
+  margin-bottom: 8px;
+  position: relative;
+  padding: 14px 40px 14px 18px;
+  -webkit-box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
+  box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
+
+  a.close {
+    opacity: 0.2;
+    position: relative;
+    top: -6px;
+    right: -24px;
+    padding: 4px;
+    cursor: "pointer";
+    background: transparent;
+    -webkit-appearance: none;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+  }
+  a.close:hover, a.close:focus {
+    opacity: 0.5;
+    background: transparent;
+  }
+  &.alert {
+    background-color: #fdeaea !important;
+    color: #ca6f74 !important;
+    border: 1px solid #f27b81 !important;
+    .error {
+      font-weight: bold;
+    }
+  }
+}
+
+form .fields {
+  margin: 30px 0;
+}
