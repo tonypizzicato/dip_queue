@@ -2,5 +2,6 @@ dir_mode: script
 dir: ../../log
 multiple: false
 backtrace: true
-monitor: false
+monitor: true
 ontop: false
+log_file: queue.log
