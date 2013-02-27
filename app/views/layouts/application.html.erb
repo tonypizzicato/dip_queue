@@ -44,9 +44,9 @@
   <div id="side-nav" class="one column">
 
     <ul class="side-nav">
-      <li class="<%= is_active?('home') %>">
-        <%= link_to root_path do %>
-            <i class="icon icon-2x icon-dashboard"></i>Home page
+      <li class="<%= is_active?('queue') %>">
+        <%= link_to queue_path do %>
+            <i class="icon icon-2x icon-dashboard"></i>Queue
         <% end %>
       </li>
       <li class="<%= is_active?('tasks') %>">

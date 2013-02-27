@@ -1,6 +1,9 @@
 WebQueue::Application.routes.draw do
   resources :tasks
 
+  get "queue" => "queue#index"
+  get "queue/stop" => "queue#stop"
+  get "queue/start" => "queue#start"
 
   root :to => "home#index"
 

@@ -1,0 +1,12 @@
+<% title "Queue monitor" %>
+<h1><%= yield :title %> <%= ('|' + toggle(@queue)).html_safe unless @queue.nil? %></h1>
+
+<% if @queue.nil? %>
+    <div class="alert-box alert">No queue service found<a href="" class="close">×</a></div>
+<% else %>
+    <ul>
+      <li><%= @queue.app_name %></li>
+      <li><%= @queue.path %></li>
+      <li><%= @queue.status %></li>
+    </ul>
+<% end %>
