@@ -24,7 +24,10 @@ describe TasksController do
   # Task. As you add validations to Task, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "type" => "1" }
+    {
+        "type" => "1",
+        "title" => "Title"
+    }
   end
 
   # This should return the minimal set of values that should be in the session
