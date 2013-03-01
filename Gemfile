@@ -12,14 +12,18 @@ group :assets do
   gem 'jquery-rails'
 end
 
+gem "bson_ext", "~> 1.8.2"
+gem "mongo", "~> 1.8.2"
 gem "mongoid", ">= 3.0.3"
-gem 'rspec-rails', :group => [:development, :test]
-gem 'database_cleaner', :group => :test
-gem 'factory_girl_rails', :group => :test
-gem 'mongoid-rspec', :group => :test
+gem "rspec-rails", :group => [:development, :test]
+gem "database_cleaner", :group => :test
+gem "factory_girl_rails", :group => :test
+gem "mongoid-rspec", :group => :test
 gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false
 gem "daemons-rails", ">= 1.1.2"
-
+gem "mechanize", ">=2.5.1"
+gem "rest-client", ">=1.6.6"
+gem "app_config", "~> 1.0.2"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
