@@ -1,0 +1,34 @@
+<%= form_for(@league) do |f| %>
+    <% if @league.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@league.errors.count, "error") %> prohibited this league from being saved:</h2>
+
+          <ul>
+            <% @league.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <div class="fields five columns">
+        <div class="row">
+          <div class="two column"><%= f.label :type, "Type:", :class => 'right inline' %></div>
+          <div class="ten column"><%= f.number_field :type, :class => "two" %></div>
+        </div>
+        <div class="row">
+          <div class="two column"><%= f.label :title, "Title:", :class => 'right inline' %></div>
+          <div class="ten columns"><%= f.text_field :title %></div>
+        </div>
+        <div class="row">
+          <div class="two column"><%= f.label :alias, "Alias:", :class => 'right inline' %></div>
+          <div class="ten columns"><%= f.text_field :alias %></div>
+        </div>
+        <div class="actions row">
+          <div class="two column"></div>
+          <div class="ten columns"><%= f.submit :class => 'button radius' %></div>
+        </div>
+      </div>
+    </div>
+<% end %>

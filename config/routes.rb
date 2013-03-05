@@ -1,9 +1,14 @@
 WebQueue::Application.routes.draw do
+  resources :leagues
+
+
   resources :tasks
 
   get "queue" => "queue#index"
   get "queue/stop" => "queue#stop"
   get "queue/start" => "queue#start"
+  get "queue/new" => "queue#new"
+  post "queue/create" => "queue#create"
 
   root :to => "home#index"
 

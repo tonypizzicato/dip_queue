@@ -64,6 +64,11 @@
             <i class="icon icon-2x icon-bar-chart"></i>Stats
         <% end %>
       </li>
+      <li class="<%= is_active?('leagues') %>">
+        <%= link_to leagues_path do %>
+            <i class="icon icon-2x icon-bar-chart"></i>Leagues
+        <% end %>
+      </li>
     </ul>
 
   </div>
