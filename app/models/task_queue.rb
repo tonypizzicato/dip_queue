@@ -6,11 +6,32 @@ class TaskQueue
   field :status, type: Integer
   field :data, type: Hash
   field :attempts, type: Integer
-  field :type, type: Integer
+
+  belongs_to :type, :class_name => 'Task'
 
   QUEUE_STATUS_READY = 0
   QUEUE_STATUS_RUNNING = 1
   QUEUE_STATUS_DELAYED = 2
+
+  after_initialize :default
+
+  validate :validate_url
+
+  def validate_url
+    begin
+      uri = URI.parse(data[:url])
+      resp = uri.kind_of?(URI::HTTP)
+    rescue URI::InvalidURIError
+      resp = false
+    end
+    unless resp
+      errors[:url] << (data[:url] + "is not an url")
+    end
+  end
+
+  def default
+    self.data ||= {}
+  end
 
   before_create do |doc|
     doc.created_at = doc.updated_at = Time.now
@@ -40,6 +61,6 @@ class TaskQueue
   end
 
   def set_ready
-    update_attributes(status: QUEUE_STATUS_READY,attempts: 0)
+    update_attributes(status: QUEUE_STATUS_READY, attempts: 0)
   end
 end

@@ -1,0 +1,19 @@
+<% title @task.type.title %>
+<h1><%= yield :title %> |
+  <span class="appendix"><%= link_to 'List', queue_status_path %></span> |
+  <span class="appendix"><%= link_to 'Edit', edit_queue_path(@task) %></span> |
+  <span class="appendix"><%= link_to 'Delete', queue_path(@task), :method => :delete %></span>
+</h1>
+
+<% if (notice) %>
+    <div class="alert-box success">
+      <%= notice %>
+      <a href="" class="close">×</a>
+    </div>
+<% end %>
+<p>
+  <b>Url:</b>
+  <%= link_to @task.data[:url] %>
+</p>
+
+

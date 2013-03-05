@@ -1,0 +1,4 @@
+<% title "New task" %>
+<h1><%= yield :title %> | <%= link_to "List", queue_status_path, :class => 'appendix' %></h1>
+
+<%= render 'form' %>

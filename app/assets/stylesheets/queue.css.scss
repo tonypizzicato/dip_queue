@@ -1,3 +1,58 @@
 // Place all the styles related to the queue controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.item {
+  margin: 10px 0;
+  span {
+    font-size: 14px;
+    width: 110px;
+    display: inline-block;
+  }
+  i {
+    margin: 0 5px;
+  }
+}
+
+.priority.high {
+  background: #FFEFEC;
+  margin-bottom: 1px;
+  span {
+    background: #FA603D;
+    padding: 2px 10px;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    text-shadow: none;
+  }
+}
+
+.task {
+  border-bottom: 1px solid #f9f9f9;
+  margin-bottom: 1px;
+  &.high {
+    border-left: 2px solid #FA603D;
+  }
+  .desc {
+    display: inline-block;
+    width: 75%;
+    padding: 10px 10px;
+    font-size: 12px;
+    .title {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+  }
+  .time {
+    display: inline-block;
+    float: right;
+    width: 20%;
+    padding: 10px 10px 10px 0px;
+    font-size: 11px;
+    text-align: right;
+    .date {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+  }
+}

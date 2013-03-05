@@ -1,0 +1,25 @@
+<% if @task.errors.any? %>
+    <% @task.errors.full_messages.each do |msg| %>
+        <div class="alert-box alert"><span class="error">Error:</span> <%= msg %>
+          <a href="" class="close">×</a></div>
+    <% end %>
+<% end %>
+<%= form_tag("/queue" + (@task.new_record? ? '' : '/' + @task._id.to_s), :method => @task.new_record? ? "post" : "put") do %>
+    <div class="row">
+      <div class="fields five columns">
+        <div class="row">
+          <div class="two column"><%= label_tag(:league, "League:", :class => "right inline") %></div>
+          <div class="ten columns"><%= select_tag(:league, options_for_select(@leagues, (@task.data[:league] unless @task.new_record?))) %></div>
+        </div>
+        <div class="row">
+          <div class="two column"><%= label_tag(:url, "Page url:", :class => "right inline") %></div>
+          <div class="ten columns"><%= text_field_tag(:url, (@task.data[:url] unless @task.new_record?)) %></div>
+        </div>
+        <div class="actions row">
+          <div class="two column"></div>
+          <div class="ten columns"><%= submit_tag(@task ? "Save" : "Add", :class => "button radius") %></div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

@@ -1,12 +1,31 @@
-<% title "Queue monitor" %>
-<h1><%= yield :title %> <%= ('|' + toggle(@queue)).html_safe unless @queue.nil? %></h1>
+<div class="row">
+  <div class="columns seven">
+    <% title "Queue monitor" %>
+    <h1><%= yield :title %> <%= ('|' + toggle(@queue)).html_safe unless @queue.nil? %></h1>
 
-<% if @queue.nil? %>
-    <div class="alert-box alert">No queue service found<a href="" class="close">×</a></div>
-<% else %>
-    <ul>
-      <li><%= @queue.app_name %></li>
-      <li><%= @queue.path %></li>
-      <li><%= @queue.status %></li>
-    </ul>
-<% end %>
+    <% if @queue.nil? %>
+        <div class="alert-box alert">No queue service found<a href="" class="close">×</a></div>
+    <% else %>
+        <div class="item"><i class="icon icon-random"></i> <span>Running script:</span> <%= @queue.app_name %></div>
+        <div class="item"><i class="icon icon-cogs"></i> <span>Control script:</span> <%= @queue.path %></div>
+        <div class="item"><i class="icon icon-dashboard"></i> <span>Queue status:</span> <%= @queue.status %></div>
+    <% end %>
+  </div>
+  <div class="columns five content-side">
+    <h1>Primary tasks</h1>
+
+    <div class="priority high"><span>high priority</span></div>
+    <% @tasks.each do |task| %>
+        <div class="task high">
+          <div class="desc">
+            <div class="title"><%= link_to "Crawl page", queue_path(task) %></div>
+            <div><%= link_to task.data[:url] %></div>
+          </div>
+          <div class="time">
+            <div class="date"><%= task.updated_at.strftime("%b %d, %Y") %></div>
+            <div><%= pluralize(task.attempts, "attempt") %></div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
