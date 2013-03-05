@@ -13,6 +13,10 @@
           <div class="ten column"><%= f.number_field :type, :class => "two" %></div>
         </div>
         <div class="row">
+          <div class="two column"><%= f.label :priority, "Priority:", :class => 'right inline' %></div>
+          <div class="ten column"><%= f.number_field :priority, :class => "two" %></div>
+        </div>
+        <div class="row">
           <div class="two column"><%= f.label :title, "Title:", :class => 'right inline' %></div>
           <div class="ten columns"><%= f.text_field :title %></div>
         </div>

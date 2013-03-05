@@ -4,6 +4,7 @@ class Task
   field :title, type: String
   field :desc, type: String
   field :unit, type: String
+  field :priority, type: Integer
 
   has_many :task_queue, :inverse_of => nil
 
