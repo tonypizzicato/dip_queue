@@ -24,7 +24,11 @@ describe LeaguesController do
   # League. As you add validations to League, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "title" => "MyString" }
+    {
+        "title" => "MyString",
+        "type" => 1,
+        "alias" => :apl
+    }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -89,14 +93,14 @@ describe LeaguesController do
       it "assigns a newly created but unsaved league as @league" do
         # Trigger the behavior that occurs when invalid params are submitted
         League.any_instance.stub(:save).and_return(false)
-        post :create, {:league => { "title" => "invalid value" }}, valid_session
+        post :create, {:league => {"title" => "invalid value"}}, valid_session
         assigns(:league).should be_a_new(League)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         League.any_instance.stub(:save).and_return(false)
-        post :create, {:league => { "title" => "invalid value" }}, valid_session
+        post :create, {:league => {"title" => "invalid value"}}, valid_session
         response.should render_template("new")
       end
     end
@@ -110,8 +114,8 @@ describe LeaguesController do
         # specifies that the League created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        League.any_instance.should_receive(:update_attributes).with({ "title" => "MyString" })
-        put :update, {:id => league.to_param, :league => { "title" => "MyString" }}, valid_session
+        League.any_instance.should_receive(:update_attributes).with({"title" => "MyString"})
+        put :update, {:id => league.to_param, :league => {"title" => "MyString"}}, valid_session
       end
 
       it "assigns the requested league as @league" do
@@ -132,7 +136,7 @@ describe LeaguesController do
         league = League.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         League.any_instance.stub(:save).and_return(false)
-        put :update, {:id => league.to_param, :league => { "title" => "invalid value" }}, valid_session
+        put :update, {:id => league.to_param, :league => {"title" => "invalid value"}}, valid_session
         assigns(:league).should eq(league)
       end
 
@@ -140,7 +144,7 @@ describe LeaguesController do
         league = League.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         League.any_instance.stub(:save).and_return(false)
-        put :update, {:id => league.to_param, :league => { "title" => "invalid value" }}, valid_session
+        put :update, {:id => league.to_param, :league => {"title" => "invalid value"}}, valid_session
         response.should render_template("edit")
       end
     end
