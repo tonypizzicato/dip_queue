@@ -20,6 +20,10 @@
           <div class="two column"><%= f.label :desc, "Description:", :class => 'right inline' %></div>
           <div class="ten columns"><%= f.text_area :desc, :rows => 3 %></div>
         </div>
+        <div class="row">
+          <div class="two column"><%= f.label :unit, "Unit:", :class => 'right inline' %></div>
+          <div class="ten columns"><%= f.text_field :unit %></div>
+        </div>
         <div class="actions row">
           <div class="two column"></div>
           <div class="ten columns"><%= f.submit :class => 'button radius' %></div>

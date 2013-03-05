@@ -6,7 +6,8 @@
   <tr>
     <th class="one text-center">Type</th>
     <th class="three">Title</th>
-    <th class="six">Desc</th>
+    <th class="five">Desc</th>
+    <th class="one">Class</th>
     <th class="two text-center">Actions</th>
   </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td class="text-center"><%= task.type %></td>
         <td><%= task.title %></td>
         <td><%= task.desc %></td>
+        <td><%= task.unit %></td>
         <td class="text-center"><%= link_to 'Show', task %> |
           <%= link_to 'Edit', edit_task_path(task) %> |
           <%= link_to 'Destroy', task, method: :delete, data: {confirm: 'Are you sure?'} %></td>

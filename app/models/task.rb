@@ -5,6 +5,8 @@ class Task
   field :desc, type: String
   field :unit, type: String
 
+  has_many :task_queue, :inverse_of => nil
+
   validates_uniqueness_of :type
-  validates_presence_of :type, :actor
+  validates_presence_of :type, :unit
 end
