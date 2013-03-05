@@ -6,7 +6,7 @@ describe "queue/index.html.erb" do
     render
 
     rendered.should include("Queue monitor")
-    #unless Daemons::Rails::Monitoring.controller("queue.rb").nil?
+    #unless Daemons::Rails::Monitoring.controller("manager.rb").nil?
     #  rendered.should_not include("No queue service found")
     #  assert_select "a.button", :text => "Stop"
     #  assert_select "a.button", :text => "Start"

@@ -26,7 +26,8 @@ describe TasksController do
   def valid_attributes
     {
         "type" => "1",
-        "title" => "Title"
+        "title" => "Title",
+        "unit" => "Crawler"
     }
   end
 

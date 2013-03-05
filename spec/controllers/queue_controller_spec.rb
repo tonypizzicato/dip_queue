@@ -10,7 +10,7 @@ describe QueueController do
   end
 
   describe "GET 'start'" do
-    it "returns http success" do
+    it "redirects to index" do
       get 'start'
       response.should redirect_to '/queue'
       Daemons::Rails::Monitoring.stop("queue.rb")
@@ -18,7 +18,7 @@ describe QueueController do
   end
 
   describe "GET 'stop'" do
-    it "returns http success" do
+    it "redirects to index" do
       Daemons::Rails::Monitoring.start("queue.rb")
       get 'stop'
       response.should redirect_to '/queue'
