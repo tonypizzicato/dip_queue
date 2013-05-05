@@ -1,5 +1,10 @@
 WebQueue::Application.routes.draw do
+  resources :sports
+
+
   resources :leagues
+  get "leagues/sport/:id" => "leagues#sport", :as => "leagues_sport"
+
 
   resources :tasks
 
