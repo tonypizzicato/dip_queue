@@ -1,0 +1,25 @@
+<% title "Listing sports" %>
+<h1><%= yield :title %> | <%= link_to "Add new", new_sport_path, :class => 'appendix' %></h1>
+
+<table class="twelve">
+  <thead>
+  <tr>
+    <th class="one text-center">Type</th>
+    <th class="three">Title</th>
+    <th class="two text-center">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @sports.each do |sport| %>
+      <tr>
+        <td class="text-center"><%= sport.type %></td>
+        <td><%= sport.title %></td>
+        <td class="text-center"><%= link_to 'Show', sport %> |
+          <%= link_to 'Edit', edit_sport_path(sport) %> |
+          <%= link_to 'Destroy', sport, method: :delete, data: {confirm: 'Are you sure?'} %> |
+          <%= link_to 'Leagues', leagues_sport_path(sport) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

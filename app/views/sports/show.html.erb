@@ -1,0 +1,17 @@
+<div class="alert-box success">
+  <%= notice %>
+  <a href="" class="close">×</a>
+</div>
+
+<p>
+  <b>Title:</b>
+  <%= @sport.title %>
+</p>
+<p>
+  <b>Type:</b>
+  <%= @sport.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_sport_path(@sport) %> |
+<%= link_to 'Back', sports_path %>
