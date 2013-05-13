@@ -1,0 +1,14 @@
+<% title @country.title %>
+<h1><%= yield :title %> |
+  <span class="appendix"><%= link_to 'Edit', edit_country_path(@country) %></span> |
+  <span class="appendix"><%= link_to 'List', countries_path %></span>
+</h1>
+
+<% if (notice) %>
+    <div class="alert-box success"><%= notice %></div>
+<% end %>
+
+<h4>Leagues</h4>
+<div>
+  <%= render 'leagues/list', :leagues => @country.leagues %>
+</div>

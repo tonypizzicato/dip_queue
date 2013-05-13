@@ -1,0 +1,23 @@
+<% title "Listing countries" %>
+<h1><%= yield :title %> | <%= link_to "Add new", new_country_path, :class => 'appendix' %></h1>
+
+<table class="twelve">
+  <thead>
+  <tr>
+    <th class="seven">Title</th>
+    <th class="two">Leagues count</th>
+    <th class="three text-center">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @countries.each do |country| %>
+      <tr>
+        <td><%= country.title %></td>
+        <td><%= country.leagues.count %></td>
+        <td class="text-center"><%= link_to 'Show', country %> |
+          <%= link_to 'Edit', edit_country_path(country) %> |
+          <%= link_to 'Destroy', country, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

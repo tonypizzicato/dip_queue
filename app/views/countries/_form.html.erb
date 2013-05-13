@@ -1,0 +1,26 @@
+<%= form_for(@country) do |f| %>
+    <% if @country.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@country.errors.count, "error") %> prohibited this country from being saved:</h2>
+
+          <ul>
+            <% @country.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <div class="fields five columns">
+        <div class="row">
+          <div class="two column"><%= f.label :title, "Title:", :class => 'right inline' %></div>
+          <div class="ten columns"><%= f.text_field :title %></div>
+        </div>
+        <div class="actions row">
+          <div class="two column"></div>
+          <div class="ten columns"><%= f.submit :class => 'button radius' %></div>
+        </div>
+      </div>
+    </div>
+<% end %>
