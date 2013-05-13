@@ -28,4 +28,5 @@ WebQueue::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  #config.logger = ActiveSupport::BufferedLogger.new(File.join(Rails::root, "/log/rails.log"))
 end

@@ -29,7 +29,7 @@ class QueueController < ApplicationController
     @task = TaskQueue.new
     @task.type = Task.where(:type => 1).first
     @task.data[:url] = params[:url]
-    @task.data[:league] = params[:league]
+    @task.data[:league] = Moped::BSON::ObjectId params[:league]
 
     respond_to do |format|
       if @task.save
@@ -52,7 +52,7 @@ class QueueController < ApplicationController
     @task = TaskQueue.find(params[:id])
 
     @task.data[:url] = params[:url]
-    @task.data[:league] = params[:league]
+    @task.data[:league] = Moped::BSON::ObjectId params[:league]
 
     respond_to do |format|
       if @task.save
@@ -76,11 +76,11 @@ class QueueController < ApplicationController
 
   def start
     Daemons::Rails::Monitoring.start("queue.rb")
-    redirect_to queue_path
+    redirect_to queue_status_path
   end
 
   def stop
     Daemons::Rails::Monitoring.stop("queue.rb")
-    redirect_to queue_path
+    redirect_to queue_status_path
   end
 end
