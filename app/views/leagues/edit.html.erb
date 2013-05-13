@@ -1,6 +1,4 @@
-<h1>Editing league</h1>
+<% title "Editing league" %>
+<h1><%= yield :title %> | <%= link_to "List", leagues_path, :class => 'appendix' %></h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @league %> |
-<%= link_to 'Back', leagues_path %>

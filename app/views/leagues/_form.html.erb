@@ -26,6 +26,10 @@
           <div class="ten columns"><%= f.text_field :title %></div>
         </div>
         <div class="row">
+          <div class="two column"><%= label_tag(:country, "Country:", :class => "right inline") %></div>
+          <div class="ten columns"><%= select_tag(:country, options_for_select(@countries, (@league[:country_id] unless @league.new_record?))) %></div>
+        </div>
+        <div class="row">
           <div class="two column"><%= f.label :alias, "Alias:", :class => 'right inline' %></div>
           <div class="ten columns"><%= f.text_field :alias %></div>
         </div>

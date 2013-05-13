@@ -74,6 +74,11 @@
             <i class="icon icon-2x icon-bar-chart"></i>Leagues
         <% end %>
       </li>
+      <li class="<%= is_active?('countries') %>">
+        <%= link_to countries_path do %>
+            <i class="icon icon-2x icon-bar-chart"></i>Countries
+        <% end %>
+      </li>
     </ul>
 
   </div>

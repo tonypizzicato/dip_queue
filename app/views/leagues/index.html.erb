@@ -1,25 +1,4 @@
 <% title "Listing leagues" %>
 <h1><%= yield :title %> | <%= link_to "Add new", new_league_path, :class => 'appendix' %></h1>
 
-<table class="twelve">
-  <thead>
-  <tr>
-    <th class="one text-center">Type</th>
-    <th class="three">Title</th>
-    <th class="five">Alias</th>
-    <th class="two text-center">Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @leagues.each do |league| %>
-      <tr>
-        <td class="text-center"><%= league.type %></td>
-        <td><%= league.title %></td>
-        <td><%= league.alias %></td>
-        <td class="text-center"><%= link_to 'Show', league %> |
-          <%= link_to 'Edit', edit_league_path(league) %> |
-          <%= link_to 'Destroy', league, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= render 'list', :leagues => @leagues %>

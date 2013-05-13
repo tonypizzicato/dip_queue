@@ -1,6 +1,4 @@
-<h1>Editing task</h1>
+<% title "Editing task" %>
+<h1><%= yield :title %> | <%= link_to "List", queue_status_path, :class => 'appendix' %></h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', queue_path(@task) %> |
-<%= link_to 'Back', queue_status_path %>

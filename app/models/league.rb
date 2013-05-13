@@ -5,9 +5,10 @@ class League
   field :type, type: Integer
 
   belongs_to :sport, :class_name => 'Sport'
+  belongs_to :country, :class_name => 'Country'
 
   validates_uniqueness_of :type
-  validates_presence_of :type, :title, :alias, :sport
+  validates_presence_of :type, :title, :alias, :sport, :country
 
 
   def default

@@ -1,8 +1,12 @@
-<div class="alert-box success">
-  <%= notice %>
-  <a href="" class="close">×</a>
-</div>
+<% title @league.title %>
+<h1><%= yield :title %> |
+  <span class="appendix"><%= link_to 'Edit', edit_league_path(@league) %></span> |
+  <span class="appendix"><%= link_to 'List', leagues_path %></span>
+</h1>
 
+<% if (notice) %>
+    <div class="alert-box success"><%= notice %></div>
+<% end %>
 <p>
   <b>Title:</b>
   <%= @league.title %>
@@ -17,7 +21,3 @@
   <b>Type:</b>
   <%= @league.type %>
 </p>
-
-
-<%= link_to 'Edit', edit_league_path(@league) %> |
-<%= link_to 'Back', leagues_path %>

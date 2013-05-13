@@ -27,7 +27,7 @@ describe LeaguesController do
     {
         "title" => "MyString",
         "type" => 1,
-        "alias" => :apl
+        "alias" => :epl
     }
   end
 

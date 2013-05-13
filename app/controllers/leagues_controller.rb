@@ -33,19 +33,22 @@ class LeaguesController < ApplicationController
   def new
     @league = League.new
     @sports = Sport.all.map { |sport| [sport.title, sport._id.to_s] }
+    @countries = Country.all.sort :title => 1
   end
 
   # GET /leagues/1/edit
   def edit
     @league = League.find(params[:id])
     @sports = Sport.all.map { |sport| [sport.title, sport._id.to_s] }
+    @countries = Country.all.sort(:title => 1).map { |country| [country.title, country._id.to_s] }
   end
 
   # POST /leagues
   # POST /leagues.json
   def create
     @league = League.new(params[:league])
-    @league.sport = Moped::BSON::ObjectId params[:sport]
+    @league[:sport] = Moped::BSON::ObjectId params[:sport]
+    @league[:country] = Moped::BSON::ObjectId params[:country]
 
     respond_to do |format|
       if @league.save
@@ -62,6 +65,7 @@ class LeaguesController < ApplicationController
   def update
     @league = League.find(params[:id])
     @league[:sport] = Moped::BSON::ObjectId params[:sport]
+    @league[:country] = Moped::BSON::ObjectId params[:country]
 
     respond_to do |format|
       if @league.save
