@@ -1,35 +1,44 @@
 #!/usr/bin/env ruby
 
+require "daemons"
+
 root = File.expand_path(File.dirname(__FILE__))
 root = File.dirname(root) until File.exists?(File.join(root, 'config'))
 Dir.chdir(root)
 
 require File.join(root, "config", "environment.rb")
 
-tasks_desc = Task.all
-manager = QueueModule::Manager.new Hash[tasks_desc.map { |task| [task.type, task.unit] }]
+running = true
 
-loop do
+SIGNAL = (RUBY_PLATFORM =~ /win32/ ? 'KILL' : 'TERM')
+
+trap(SIGNAL) {
+  running = false
+}
+
+while running do
 
   Rails.logger.info "This daemon is still running at #{Time.now}.\n"
   Rails.logger.info "Start parsing"
   begin
     task = TaskQueue.deque
+    p task
     if task
-      unit = manager.get_unit task
-      handler = manager.get_handler task
+      unit = QueueModule::Manager::get_unit task
+      Rails.logger.info "Unit type: #{unit.class.name}"
+      handler = QueueModule::Manager::get_handler task
       unit.add_observer handler
       result = unit.perform
-      if task.set_ready
-      end
-      Rails.logger.info result
+      #if task.set_ready
+      #end
+      Rails.logger.info "Result: " + result.to_s
     else
       Rails.logger.info "No task found"
       #sleep 3
     end
   rescue Exception => e
-    Rails.logger.error e.message
-    Rails.logger.error e.backtrace
+    Rails.logger.error "Exception raised: " + e.message
+    Rails.logger.error "Exception backtrace: " + e.backtrace.to_s
     if task
       task.set_ready
     end

@@ -4,4 +4,6 @@ multiple: false
 backtrace: true
 monitor: true
 ontop: false
+log_output: true
 log_file: queue.log
+force_kill_waittime: 10

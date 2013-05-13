@@ -7,6 +7,8 @@ module QueueModule
 
       include ::Observable
 
+      attr_accessor :last_exception
+
       def initialize(task_data, unit)
         singleton = class << self;
           self
@@ -15,16 +17,22 @@ module QueueModule
         singleton.send :include, unit
         singleton.send :add_hooks, :perform
         @task = task_data
+        @last_exception = nil
+      end
+
+      def set_parser parser
+        @parser = parser
+        self
       end
 
       def before_method
         changed
-        notify_observers(EVENT_BEFORE, @task, self)
+        notify_observers(EVENT_BEFORE, @task, nil, self)
       end
 
-      def after_method
+      def after_method result
         changed
-        notify_observers(EVENT_AFTER, @task, self)
+        notify_observers(EVENT_AFTER, @task, result, self)
       end
 
       private
@@ -36,7 +44,7 @@ module QueueModule
           self.send :define_method, name do
             before_method
             result = self.send :sub_method
-            after_method
+            after_method result
             result
           end
         end

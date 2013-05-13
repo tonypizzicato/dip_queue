@@ -12,6 +12,7 @@ class TaskQueue
   QUEUE_STATUS_READY = 0
   QUEUE_STATUS_RUNNING = 1
   QUEUE_STATUS_DELAYED = 2
+  QUEUE_STATUS_FINISHED = 3
 
   after_initialize :default
 
@@ -25,7 +26,7 @@ class TaskQueue
       resp = false
     end
     unless resp
-      errors[:url] << (data[:url] + "is not an url")
+      errors[:url] << (data[:url].to_s + "is not an url")
     end
   end
 

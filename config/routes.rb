@@ -1,4 +1,7 @@
 WebQueue::Application.routes.draw do
+  resources :countries
+
+
   resources :sports
 
 
