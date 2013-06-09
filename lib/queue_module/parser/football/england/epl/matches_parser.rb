@@ -8,14 +8,33 @@ module QueueModule
 
             def parse page, domain = nil
               result = {
-                  :stats => [],
+                  :stats   => [],
                   :lineups => []
               }
-              page.search("td.score a").each do |link|
-                result[:stats].push(domain + link[:href].gsub(/(match-preview)|(match-report)/, "match-stats"))
-                result[:lineups].push(domain + link[:href].gsub(/(match-preview)/, "teams"))
+              tables = page.search("[widget='fixturelistbroadcasters'] .contentTable")
+              tables.each do |table|
+                table.search("tr:not(:eq(1))").each do |tr|
+                  unless tr.search(".score").empty?
+                    link = tr.search(".score a")[0][:href]
+                    result[:stats].push({
+                                            :time     => tr.search(".time").text,
+                                            :link     => domain + link.gsub(/(match-preview)|(match-report)/, "match-stats"),
+                                            :home     => tr.search(".rHome").text.strip,
+                                            :away     => tr.search(".rAway").text.strip,
+                                            :location => tr.search(".location").text.strip
+                                        }) unless tr.search(".score").empty?
+
+                    result[:lineups].push({
+                                              :time     => tr.search(".time").text,
+                                              :link     => domain + link.gsub(/(match-preview)/, "teams"),
+                                              :home     => tr.search(".rHome").text.strip,
+                                              :away     => tr.search(".rAway").text.strip,
+                                              :location => tr.search(".location").text.strip
+                                          })
+                  end
+                end
+                result[:teams] = get_teams page, domain
               end
-              result[:teams] = get_teams page, domain
               result
             end
 

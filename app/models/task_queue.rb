@@ -6,6 +6,7 @@ class TaskQueue
   field :status, type: Integer
   field :data, type: Hash
   field :attempts, type: Integer
+  field :priority, type: Integer
 
   belongs_to :type, :class_name => 'Task'
 
@@ -50,6 +51,10 @@ class TaskQueue
     doc.data = HashWithIndifferentAccess.new doc.data
   end
 
+  before_save do |doc|
+    doc.priority = doc.type.priority
+  end
+
   def self.deque count
     tasks = []
     count.times do
@@ -58,7 +63,7 @@ class TaskQueue
           {:status => QUEUE_STATUS_DELAYED, :updated_at.lt => 25.minutes.ago},
           {:status => QUEUE_STATUS_RUNNING, :updated_at.lt => 5.minutes.ago}
       ) \
-    .asc(:updated_at) \
+    .asc(:priority, :updated_at) \
     .find_and_modify(
           {
               "$set" => {:status => QUEUE_STATUS_RUNNING, :updated_at => Time.now},

@@ -12,19 +12,21 @@ module QueueModule
                   :squad => []
               }
               table  = page.search ".clubsquadlists .contentTable tbody"
-              table.search("tr").each do |tr|
-                name     = tr.search("td.player-squadno a")
-                name     = name.size > 0 ? name : tr.search("td.player-squadno")
-                position = tr.search("td.player-position").text
-                link     = name.search('a').size > 0 ? (domain + name[0][:href]) : nil
-                name     = name.text.gsub(/\s+[\d\r\t\n\.]+\s+/, "")
+              unless table.empty?
+                table.search("tr").each do |tr|
+                  name     = tr.search("td.player-squadno a")
+                  name     = name.size > 0 ? name : tr.search("td.player-squadno")
+                  position = tr.search("td.player-position").text
+                  link     = name.search('a').size > 0 ? (domain + name[0][:href]) : nil
+                  name     = name.text.gsub(/\s+[\d\r\t\n\.]+\s+/, "")
 
-                result[:squad].push({
-                                        :name     => name,
-                                        :position => position,
-                                        :link     => link,
-                                        :number   => tr.search("td.player-squadno span").text.to_i
-                                    })
+                  result[:squad].push({
+                                          :name     => name,
+                                          :position => position,
+                                          :link     => link,
+                                          :number   => tr.search("td.player-squadno span").text.to_i
+                                      })
+                end
               end
               result
             end
