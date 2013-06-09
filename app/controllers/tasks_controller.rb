@@ -1,8 +1,7 @@
 class TasksController < ApplicationController
   # GET /tasks
   def index
-    @tasks = Task.all
-
+    @tasks = Task.all.sort(type: 1)
     respond_to do |format|
       format.html # index.html.erb
     end
