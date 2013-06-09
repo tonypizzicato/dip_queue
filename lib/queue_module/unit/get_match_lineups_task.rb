@@ -1,6 +1,6 @@
 module QueueModule
   module Unit
-    module GetMatchInfoTask
+    module GetMatchLineupsTask
       include GetCommonTask
     end
   end

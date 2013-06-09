@@ -24,7 +24,7 @@ module QueueModule
         self.class
       end
 
-      def parse page
+      def parse page, domain = nil
 
       end
     end

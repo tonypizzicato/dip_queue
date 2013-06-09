@@ -9,10 +9,11 @@ class TaskQueue
 
   belongs_to :type, :class_name => 'Task'
 
-  QUEUE_STATUS_READY = 0
-  QUEUE_STATUS_RUNNING = 1
-  QUEUE_STATUS_DELAYED = 2
+  QUEUE_STATUS_READY    = 0
+  QUEUE_STATUS_RUNNING  = 1
+  QUEUE_STATUS_DELAYED  = 2
   QUEUE_STATUS_FINISHED = 3
+  QUEUE_STATUS_WAITING  = 4
 
   after_initialize :default
 
@@ -20,7 +21,7 @@ class TaskQueue
 
   def validate_url
     begin
-      uri = URI.parse(data[:url])
+      uri  = URI.parse(data[:url])
       resp = uri.kind_of?(URI::HTTP)
     rescue URI::InvalidURIError
       resp = false
@@ -49,19 +50,30 @@ class TaskQueue
     doc.data = HashWithIndifferentAccess.new doc.data
   end
 
-  def self.deque
-    self.where(:status => QUEUE_STATUS_READY) \
+  def self.deque count
+    tasks = []
+    count.times do
+      tasks << self.any_of(
+          {:status => QUEUE_STATUS_READY},
+          {:status => QUEUE_STATUS_DELAYED, :updated_at.lt => 25.minutes.ago},
+          {:status => QUEUE_STATUS_RUNNING, :updated_at.lt => 5.minutes.ago}
+      ) \
     .asc(:updated_at) \
     .find_and_modify(
-        {
-            "$set" => {:status => QUEUE_STATUS_RUNNING},
-            "$inc" => {:attempts => 1}
-        },
-        new: true
-    )
+          {
+              "$set" => {:status => QUEUE_STATUS_RUNNING, :updated_at => Time.now},
+              "$inc" => {:attempts => 1},
+
+          },
+          new: true
+      )
+    end
+
+    tasks
   end
 
   def set_ready
     update_attributes(status: QUEUE_STATUS_READY, attempts: 0)
   end
+
 end

@@ -16,33 +16,37 @@ trap(SIGNAL) {
   running = false
 }
 
+threads_count    = 10
+tasks_for_thread = 2
 while running do
-
   Rails.logger.info "This daemon is still running at #{Time.now}.\n"
   Rails.logger.info "Start parsing"
-  begin
-    task = TaskQueue.deque
-    p task
-    if task
-      unit = QueueModule::Manager::get_unit task
-      Rails.logger.info "Unit type: #{unit.class.name}"
-      handler = QueueModule::Manager::get_handler task
-      unit.add_observer handler
-      result = unit.perform
-      #if task.set_ready
-      #end
-      Rails.logger.info "Result: " + result.to_s
-    else
-      Rails.logger.info "No task found"
-      #sleep 3
-    end
-  rescue Exception => e
-    Rails.logger.error "Exception raised: " + e.message
-    Rails.logger.error "Exception backtrace: " + e.backtrace.to_s
-    if task
-      task.set_ready
+  threads = []
+  threads_count.times do
+    tasks = TaskQueue.deque tasks_for_thread
+    threads << Thread.new(tasks) do |tasks_to_run|
+      tasks_to_run.each do |task|
+        if task
+          begin
+            unit = QueueModule::Manager::get_unit task
+            Rails.logger.info "Unit type: #{unit.class.name}"
+            handler = QueueModule::Manager::get_handler task
+            unit.add_observer handler
+            result = unit.perform
+            Rails.logger.info "Result: " + result.to_s
+          rescue Exception => e
+            Rails.logger.error "Exception raised: " + e.message
+            Rails.logger.error "Exception backtrace: " + e.backtrace.to_s
+            task.set_ready
+          end
+        else
+          Rails.logger.info "No task found"
+          sleep 3
+        end
+      end
     end
   end
+  threads.each { |thr| thr.join }
   Rails.logger.info "End parsing"
   sleep 3
 end

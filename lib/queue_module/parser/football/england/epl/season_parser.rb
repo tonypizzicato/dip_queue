@@ -6,7 +6,7 @@ module QueueModule
           class SeasonParser < QueueModule::Parser::Parser
             register self.name
 
-            def parse page, domain
+            def parse page, domain = nil
               result = []
               form = page.form_with(:id => 'fixture-search')
               path = domain + form.action
